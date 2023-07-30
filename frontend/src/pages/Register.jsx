@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { FaUser } from "react-icons/fa";
+import { FaRegRegistered } from "react-icons/fa";
 import { register, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
@@ -53,7 +53,6 @@ function Register() {
         email,
         password,
       };
-      console.log(`name ${name} email ${email} password ${password}`);
       dispatch(register(userData));
     }
   };
@@ -66,7 +65,7 @@ function Register() {
     <>
       <section className="heading">
         <h1>
-          <FaUser /> Register
+          <FaRegRegistered /> Register
         </h1>
         <p>Create an account here</p>
       </section>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaSignInAlt } from "react-icons/fa";
+import { FaLongArrowAltRight } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,7 +7,6 @@ import { login, reset } from "../features/auth/authSlice";
 import Spinner from "../components/Spinner";
 
 function Login() {
-  console.log("in login()");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -35,7 +34,7 @@ function Login() {
     }
 
     dispatch(reset());
-  }, [isError, isSuccess, message, navigate, dispatch]);
+  }, [isError, isSuccess, message, navigate, dispatch, user]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -63,7 +62,7 @@ function Login() {
     <>
       <section className="heading">
         <h1>
-          <FaSignInAlt /> Login
+          <FaLongArrowAltRight /> Login
         </h1>
         <p>Login and view/create encrypted messages</p>
       </section>

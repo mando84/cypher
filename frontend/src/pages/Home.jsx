@@ -6,7 +6,6 @@ import Spinner from "../components/Spinner";
 import Messages from "../components/Messages";
 
 function Home() {
-  console.log("in home");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);

@@ -5,8 +5,6 @@ const User = require("../models/userModel");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
-  console.log("in registerUser backend");
-  console.log(`email: ${email}`);
 
   if (!name || !email || !password) {
     res.status(400);
@@ -19,10 +17,8 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("User already exists");
   }
-  console.log("before bcrypt");
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-  console.log("after bcrypt");
 
   const user = await User.create({
     name,
@@ -30,7 +26,6 @@ const registerUser = asyncHandler(async (req, res) => {
     password: hashedPassword,
   });
 
-  console.log(user);
   if (user) {
     res.status(201).json({
       _id: user.id,

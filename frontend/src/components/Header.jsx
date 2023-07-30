@@ -2,7 +2,6 @@ import { FaUserAlt, FaRegistered } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../features/auth/authSlice";
-import { reset as resetMessages } from "../features/messages/messageSlice";
 
 function Header() {
   const navigate = useNavigate();
@@ -10,13 +9,8 @@ function Header() {
   const { user } = useSelector((state) => state.auth);
 
   const onLogout = () => {
-    console.log("before logout func");
-    //dispatch(resetMessages());
     dispatch(logout());
-    console.log("before reset func");
     dispatch(reset());
-
-    console.log("before navigate func");
     navigate("/login");
   };
 

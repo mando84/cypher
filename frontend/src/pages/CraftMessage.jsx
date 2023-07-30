@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createMessage } from "../features/messages/messageSlice";
 import SwitchChar from "../components/SwitchChar";
 import RotateChars from "../components/RotateChars";
@@ -13,7 +13,6 @@ function Message() {
   const [newChar, setNewChar] = useState("");
   const [messageDone, setMessageDone] = useState(false);
   const [rotateNum, setRotateNum] = useState(0);
-  const [newChars, setNewChars] = useState([]);
   const [replacedSpaces, setReplacedSpaces] = useState(false);
   const [spaceIdxs, setSpaceIdxs] = useState([]);
   const [key, setKey] = useState([]);
@@ -86,24 +85,19 @@ function Message() {
     for (let i = 33; i < 65; i++) {
       original.push(String.fromCharCode(i));
       shuffled.push(String.fromCharCode(i));
-      console.log(String.fromCharCode(i));
     }
 
     for (let i = 91; i < 97; i++) {
       original.push(String.fromCharCode(i));
       shuffled.push(String.fromCharCode(i));
-      console.log(String.fromCharCode(i));
     }
 
     for (let i = 123; i < 127; i++) {
       original.push(String.fromCharCode(i));
       shuffled.push(String.fromCharCode(i));
-      console.log(String.fromCharCode(i));
     }
 
-    console.log(`Original: ${original}`);
     shuffleArray(shuffled);
-    console.log(`ShuffeledIdxs: ${shuffled}`);
     let newIdx;
     let messageIdxs = [];
     let messageChars = [];
@@ -113,13 +107,8 @@ function Message() {
         (char.codePointAt() >= 91 && char.codePointAt() <= 96) ||
         (char.codePointAt() >= 123 && char.codePointAt() <= 126)
       ) {
-        console.log(`char.codePointAt(): ${char.codePointAt()} char: ${char}`);
-
         newIdx = original.indexOf(char);
-        console.log(`newidx: ${newIdx}`);
         messageIdxs.push(idx);
-
-        console.log(`newIdx: ${newIdx}`);
         messageChars.push(original[newIdx]);
         return shuffled[newIdx];
       } else {
@@ -138,29 +127,25 @@ function Message() {
   const onClick5 = () => {
     let idxs = [];
     let newChs = [];
-    if (replacedSpaces == false) {
+    if (replacedSpaces === false) {
       let messageArr = message.split("").map((char, idx) => {
-        if (char == " ") {
+        if (char === " ") {
           idxs.push(idx);
           newChs.push(String.fromCharCode(getRandom()));
-          console.log(`newChs: ${newChs}`);
           return newChs[newChs.length - 1];
         } else {
           return char;
         }
       });
 
-      console.log(`newChs2: ${newChs}`);
-
       setReplacedSpaces(true);
 
-      if (spaceIdxs.length == 0) {
+      if (spaceIdxs.length === 0) {
         setSpaceIdxs(idxs);
       }
       setMessage(messageArr.join(""));
     } else {
       let newMessage = message.split("").map((char, idx) => {
-        console.log(`spaceIdx: ${spaceIdxs}`);
         if (spaceIdxs.includes(idx)) return " ";
         return char;
       });
